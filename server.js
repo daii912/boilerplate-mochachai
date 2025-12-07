@@ -16,50 +16,33 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/hello', function (req, res) {
   const name = req.query.name || 'Guest';
-  res.type('txt').send('hello ' + name);
+  res.type('text').send('hello ' + name);
 })
 
-const travellers = function (req, res) {
+const travellers = (req, res) => {
   let data = {};
   if (req.body && req.body.surname) {
-    switch (req.body.surname.toLowerCase()) {
+    switch (req.body.surname.toLowerCase().trim()) {
       case 'polo':
-        data = {
-          name: 'Marco',
-          surname: 'Polo',
-          dates: '1254 - 1324'
-        };
+        data = { name: 'Marco', surname: 'Polo', dates: '1254 - 1324' };
         break;
       case 'colombo':
-        data = {
-          name: 'Cristoforo',
-          surname: 'Colombo',
-          dates: '1451 - 1506'
-        };
+        data = { name: 'Cristoforo', surname: 'Colombo', dates: '1451 - 1506' };
         break;
       case 'vespucci':
-        data = {
-          name: 'Amerigo',
-          surname: 'Vespucci',
-          dates: '1454 - 1512'
-        };
+        data = { name: 'Amerigo', surname: 'Vespucci', dates: '1454 - 1512' };
         break;
       case 'da verrazzano':
       case 'verrazzano':
-        data = {
-          name: 'Giovanni',
-          surname: 'da Verrazzano',
-          dates: '1485 - 1528'
-        };
+        data = { name: 'Giovanni', surname: 'da Verrazzano', dates: '1485 - 1528' };
         break;
       default:
-        data = {
-          name: 'unknown'
-        }
+        data = { name: 'unknown' };
     }
   }
   res.json(data);
 };
+
 
 
 app.route('/travellers')
@@ -94,7 +77,7 @@ app.listen(port, function () {
       console.log('Tests are not valid:');
       console.log(error);
     }
-  }, 1500);
+  }, 2000);
 });
 
 
